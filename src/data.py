@@ -13,12 +13,32 @@ def clean_data(df: pd.DataFrame):
             df[col]=pd.to_numeric(df[col], errors='coerce')
     return df
 
-def peak_hours(df: pd.DataFrame, datetime_column='started_at'):
-    if datetime_column not in df.columns:
-        raise KeyError(f"{datetime_column} not in DataFrame")
-    hours=df[datetime_column].dropna().dt.hour
-    result=hours.value_counts().sort_index()
-    return result.rename_axis("hour").reset_index(name="count")
+def peak_hours(df, datetime_column=None):
+
+    # List of possible datetime column names used in bike-share datasets
+    possible_columns = ["started_at", "start_time", "Start Time", "STARTTIME"]
+
+    # Auto-detect the column if not provided
+    if datetime_column is None:
+        for col in possible_columns:
+            if col in df.columns:
+                datetime_column = col
+                break
+
+    # If still not found, raise error
+    if datetime_column is None:
+        raise KeyError("No valid datetime column found. Expected one of: " +
+                       ", ".join(possible_columns))
+
+    # Convert to datetime
+    df[datetime_column] = pd.to_datetime(df[datetime_column], errors='coerce')
+
+    # Extract hour
+    df["hour"] = df[datetime_column].dt.hour
+
+    # Group by hour
+    return df.groupby("hour").size().reset_index(name="trips")
+
 
 def busiest_stations(df: pd.DataFrame, col='start_station_name', top_n=10):
     if col not in df.columns:
