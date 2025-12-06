@@ -132,6 +132,7 @@ def bike_usage(df: pd.DataFrame):
     if "bike_id" not in df.columns:
         raise KeyError("bike_id column missing.")
 
+
     usage = df["bike_id"].value_counts().head(20)
     return usage.rename_axis("bike_id").reset_index(name="count")
 
