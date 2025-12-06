@@ -10,6 +10,8 @@ if file:
     df = load_data(file)
     df = clean_data(df)
     st.write("Cleaned Data Preview", df.head())
+    
+    
 
     st.subheader("Peak Hours")
     ph = peak_hours(df)
