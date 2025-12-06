@@ -11,4 +11,5 @@ def test_load_valid_csv(tmp_path):
     p.write_text("a,b\n1,2")
     df = load_data(str(p))
     assert isinstance(df, pd.DataFrame)
+    
     assert df.shape == (1,2)
