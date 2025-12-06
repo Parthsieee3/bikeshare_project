@@ -130,6 +130,7 @@ def trip_duration_distribution(df: pd.DataFrame):
 # ================================================================+
 def bike_usage(df: pd.DataFrame):
     if "bike_id" not in df.columns:
+        
         raise KeyError("bike_id column missing.")
 
 
