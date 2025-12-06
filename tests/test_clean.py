@@ -9,3 +9,4 @@ def test_clean_parses_dates_and_numeric():
     c = clean_data(df)
     assert str(c['started_at'].dtype).startswith("datetime")
     assert c['duration_minutes'].dtype.kind in ('i','f')
+
