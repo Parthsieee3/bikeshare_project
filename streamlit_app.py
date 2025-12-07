@@ -20,7 +20,7 @@ import plotly.express as px
 import pydeck as pdk
 from data import load_data, clean_data, add_time_features, full_analytics, top_n_stations, station_flow, trips_over_time, user_type_summary, hourly_heatmap_data, get_station_coords, duration_stats
 
-
+# --- Streamlit page config ---
 st.set_page_config(page_title="Toronto Bike-Sharing Analytics", layout="wide", initial_sidebar_state="expanded")
 
 # --- Sidebar ---
