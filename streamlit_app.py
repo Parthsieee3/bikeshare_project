@@ -34,6 +34,7 @@ station_select = st.sidebar.text_input("Inspect station (type name)", value="")
 download_button = st.sidebar.checkbox("Show download filtered dataset", value=True)
 
 # --- Load data safely ---
+######
 @st.cache_data(show_spinner=False)
 def load_and_prep(path_or_file, use_sample_flag: bool):
     if path_or_file is None:
